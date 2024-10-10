@@ -1,0 +1,66 @@
+﻿<h3>IconController</h3>
+
+@code {
+    private int minSize = 28;
+    private int maxSize = 512;
+    private int minSizeDegrees = 0;
+    private int maxSizeDegrees = 360;
+    private int? logoSize = 0;
+    private int? rotation = 0;
+    private string color = "...";
+}
+
+
+<!-- 
+    by default, CSS calculates the width of any element as its content. This unfortunately means 
+    if you set any element to 100% width of its parent, and add a padding/border/margin, those are 
+    extra and make the child overflows the parent container, as seen in your header.
+    You can change how CSS calculates width by setting box-sizing:border-box;
+
+    For Tailwind css: box-border	box-sizing: border-box;
+-->
+<div class="box-border mx-2">
+    <div>
+        <label>
+            Icon
+        </label>
+             
+        <div class="p-3 cursor-pointer bg-gray-200 rounded-md w-[50px] h-[50px] 
+            items-center justify-center my-2 text-bl-black">
+
+            <span class="material-symbols-rounded">
+                sentiment_satisfied
+            </span>
+        </div>
+
+        <div class="py-2">
+            <label for="default-range" class="block p-2 mb-2 text-sm font-medium text-gray-900 dark:text-white
+                flex justify-between items-center">Size <span> @logoSize px</span></label>
+            <!--
+                We want to see updates as the slider is moved. Data binding in Blazor allows for this by 
+                letting you specify which event triggers a change using the syntax  [ bind:<eventname> ]. 
+            -->
+            <input id="default-range" type="range" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                   min="@minSize" max="@maxSize" step="1" @bind=logoSize @bind:event="oninput" />
+        </div>
+
+        <div class="py-2">
+            <label for="default-range" class="block p-2 mb-2 text-sm font-medium text-gray-900 dark:text-white
+                flex justify-between items-center">Rotate <span> @rotation°</span></label>
+            <!--
+                We want to see updates as the slider is moved. Data binding in Blazor allows for this by
+                letting you specify which event triggers a change using the syntax  [ bind:<eventname> ].
+            -->
+            <input id="default-range" type="range" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                   min="@minSizeDegrees" max="@maxSizeDegrees" step="1" @bind=rotation @bind:event="oninput" />
+        </div>
+
+        <div class="py-2">
+            <label for="default-range" class="block p-2 mb-2 text-sm font-medium text-gray-900 dark:text-white
+                flex justify-between items-center">Colour <span> @color</span></label>
+            
+            <ColorJoe />
+        </div>
+        
+    </div>
+</div>

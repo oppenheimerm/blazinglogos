@@ -1,0 +1,16 @@
+﻿.header-logo,
+header-logo-light {
+    width: 50px;
+    height: 50px;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    .header-logo {
+        display: none;
+    }
+
+    .header-logo-light {
+        display: inline-block;
+    }
+}

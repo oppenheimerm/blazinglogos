@@ -1,0 +1,45 @@
+﻿@inject IJSRuntime JSRuntime;
+
+@code {
+
+
+    // To load a JS file only where required (e.g., a specific page), you need to
+    // implement the IJSObjectReference interface and utilize the JavaScript
+    // module isolation properly.
+    private IJSObjectReference? module;
+
+    
+    //  Load after the entire page has been rendered
+    //  We need to make sure that if we access elements
+    // /on the page, that they are there for us to access.
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        //  We don't need to load our javascript every time the
+        //  the page loads
+        if (firstRender)
+        {
+            module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./Components/Layout/ColorJoe.razor.js");
+
+            //  If we needed to init our javascript, we can do the following:
+            //  public List<Food>? specials null not properly handled
+            await module.InvokeVoidAsync("displayColorJoeDialog");
+
+        }
+    }
+}
+
+
+<div class="container">
+    <div class="colorjoe"></div>
+    <div class="config">
+        <div class="config-title">Selected Colour</div>
+        <div class="selected-color-text">#009578</div>
+        <div class="selected-color"></div>
+        <div class="config-title">Saved Colours</div>
+        <div clsss="saved-color"></div>
+        <div clsss="saved-color"></div>
+        <div clsss="saved-color"></div>
+        <div clsss="saved-color"></div>
+        <div clsss="saved-color"></div>
+    </div>
+</div>
