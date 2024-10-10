@@ -1,11 +1,92 @@
 ﻿@page "/"
+@using BlazingLogos.Components.Layout
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+@code{
+    private int activeItem = 0;
 
-<span class="material-symbols-rounded">
-    home
-</span>
+    private void setActiveItem(int id)
+    {
+        activeItem = id;
+    }
+}
 
-Welcome to your new app.
+<div class="h-full">
+    <!--
+        side nav
+        width: 16rem; /* 256px
+        position: fixed
+    */ -->
+    <div class="w-64 fixed">
+        <!-- Full screen height -->
+        <div class="shadow-sm ">
+
+            <div class="flex items-center gap-2 cursor-pointer hover:bg-bl-primary hover:text-white px-7
+        @((activeItem == 0)? "side-item-active" : "")" @onclick="() => setActiveItem(0)">
+                <span class="material-symbols-rounded">
+                    design_services
+                </span>
+                <h2 class="p-2 text-lg px-7 text-grey-500 my-2">Icon</h2>
+            </div>
+            <div class="flex items-center gap-2 cursor-pointer hover:bg-bl-primary hover:text-white px-7
+        @((activeItem == 1)? "side-item-active" : "")" @onclick="() => setActiveItem(1)">
+                <span class="material-symbols-rounded">
+                    add_photo_alternate
+                </span>
+                <h2 class="p-2 text-lg px-7 text-grey-500 my-2">Background</h2>
+            </div>
+            <div class="flex items-center gap-2 cursor-pointer hover:bg-bl-primary hover:text-white px-7
+        @((activeItem == 2)? "side-item-active" : "")" @onclick="() => setActiveItem(2)">
+                <span class="material-symbols-rounded">
+                    award_star
+                </span>
+                <h2 class="p-2 text-lg px-7 text-grey-500 my-2">Upgrade</h2>
+            </div>
+        </div>
+    </div>
+    <!--
+        Body
+        Grid
+        sm: col-1,
+        >= md col-6
+    -->
+    <div class="ml-64 grid grid-cols-1 md:grid-cols-6 shadow-sm p-5 h-full">
+
+        <!--
+            Control Panel
+             When medium occupy 2/6 columns
+        -->
+        <div class="md:col-span-2">
+            @{
+                if (activeItem == 0)
+                {
+                    <IconController />
+                }
+                else
+                {
+                    <BackgroundController />
+                }
+            }
+
+        </div>
+        <!--
+             Icon Preview
+             When medium occupy 3/6 columns
+        -->
+        <div class="md:col-span-3 bg-red-100">
+            <h2>Icon Preview</h2>
+        </div>
+        <!--
+            Ad Container
+            When medium occupy 1/6 columns
+        -->
+        <div class="bg-blue-100">
+            <h2>Ad Container</h2>
+        </div>
+
+    </div>
+
+
+</div>
+
