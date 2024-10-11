@@ -12,7 +12,7 @@ colorPicker .oned {
     margin-right: 0;
 }
 
-.container{
+.container {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -20,12 +20,38 @@ colorPicker .oned {
     margin-right: auto;
     border-radius: 8px;
     background: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0,  0.15);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    color: #303030;
+}
+
+.selected-color,
+.saved-color
+{
+    height: 16px;
+    border: 1px solid #eeeeee;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.config{
+    padding-bottom: 8px;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .config-title{
     text-align: center;
-    padding: 15px 0;
+    padding: 16px 0;
     font-weight: bold;
 }
 
+.selected-color-text{
+    text-align: center;
+    font-family: monospace;
+    font-size: 1.25em; /* 20px */
+    margin-bottom: 12px;
+}
+
+.saved-color:not(:last-of-type){
+    margin-bottom: 8px;
+}
