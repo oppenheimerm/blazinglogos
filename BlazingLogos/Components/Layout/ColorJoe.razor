@@ -1,4 +1,6 @@
-﻿@inject IJSRuntime JSRuntime;
+﻿@using System.Text.Json
+
+@inject IJSRuntime JSRuntime;
 
 @code {
 
@@ -8,7 +10,7 @@
     // module isolation properly.
     private IJSObjectReference? module;
 
-    
+
     //  Load after the entire page has been rendered
     //  We need to make sure that if we access elements
     // /on the page, that they are there for us to access.
@@ -22,24 +24,35 @@
 
             //  If we needed to init our javascript, we can do the following:
             //  public List<Food>? specials null not properly handled
-            await module.InvokeVoidAsync("displayColorJoeDialog");
+            await module.InvokeVoidAsync("initColorJoe");
 
         }
     }
+
+    /*public string GetSavedColours()
+    {
+        var _jasonQuery = new List<string>() { "#F5FC59", "#0000FF", "#000000", "#EDF1FA", "#1991EE" };
+        var _savedColours = JsonSerializer.Serialize(_jasonQuery);
+        return _savedColours;
+    }*/
+
+
 }
 
 
-<div class="container">
+<div class="container" id="colourJoeContainer">
     <div class="colorjoe"></div>
     <div class="config">
         <div class="config-title">Selected Colour</div>
         <div class="selected-color-text">#009578</div>
         <div class="selected-color"></div>
         <div class="config-title">Saved Colours</div>
-        <div clsss="saved-color"></div>
-        <div clsss="saved-color"></div>
-        <div clsss="saved-color"></div>
-        <div clsss="saved-color"></div>
-        <div clsss="saved-color"></div>
+        
+        <div class="saved-color"></div>
+        <div class="saved-color"></div>
+        <div class="saved-color"></div>
+        <div class="saved-color"></div>
+        <div class="saved-color"></div>
+        
     </div>
 </div>
